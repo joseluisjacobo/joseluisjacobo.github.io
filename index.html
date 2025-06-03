@@ -3,779 +3,480 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aplicación Interactiva: Empalmadora de Fibra Óptica 4M</title>
+    <!-- Chosen Palette: Vibrant Professional -->
+    <!-- Application Structure Plan: La aplicación presenta un currículum vitae interactivo en una única página, estructurado como un dashboard dinámico. Se divide en secciones temáticas (Perfil, Habilidades, Software, Experiencia, Educación, Contacto) para facilitar la exploración no lineal. El diseño prioriza la visualización de datos clave a través de gráficos interactivos y una línea de tiempo cronológica, permitiendo a los usuarios (reclutadores) comprender rápidamente las fortalezas y la trayectoria profesional. La navegación es intuitiva mediante el desplazamiento, y cada sección ofrece un resumen conciso antes de presentar los detalles visuales o textuales. Este enfoque mejora la digestión de la información y la experiencia del usuario, haciendo el perfil más atractivo y memorable. -->
+    <!-- Visualization & Content Choices: 
+        - Perfil Profesional -> Objetivo: Informar -> Visualización: Gráfico de Donut (Chart.js/Canvas) -> Interacción: Hover para detalles -> Justificación: Ofrece una visión rápida de la distribución de competencias clave.
+        - Competencias Clave -> Objetivo: Comparar -> Visualización: Gráfico de Radar (Chart.js/Canvas) -> Interacción: Hover para detalles -> Justificación: Muestra el nivel de dominio en múltiples áreas de forma compacta y visualmente impactante.
+        - Dominio de Herramientas y Software -> Objetivo: Comparar -> Visualización: Gráfico de Barras Horizontal (Chart.js/Canvas) -> Interacción: Hover para detalles -> Justificación: Ideal para comparar la experiencia en diversas herramientas, acomodando etiquetas largas y facilitando la lectura.
+        - Línea de Tiempo Profesional -> Objetivo: Mostrar Cambio/Organizar -> Visualización: Línea de Tiempo Vertical (HTML/CSS/Tailwind) -> Interacción: Desplazamiento -> Justificación: Presenta la progresión de la carrera de forma narrativa y fácil de seguir.
+        - Habilidades Estratégicas -> Objetivo: Organizar -> Visualización: Etiquetas/Píldoras estilizadas (HTML/CSS/Tailwind) -> Interacción: Agrupación visual -> Justificación: Permite una rápida identificación de habilidades clave y modernas.
+        - Formación Académica y Contacto -> Objetivo: Informar -> Visualización: Listas y enlaces (HTML) -> Interacción: Clic en enlaces -> Justificación: Presentación clara y directa de información esencial.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <title>CV Interactivo - José Luis Hernández Jacobo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap"
       rel="stylesheet"
     />
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-      }
 
-      .imagen {
-        display: flex;
-        justify-content: center;
-      }
-      .chart-container {
-        position: relative;
-        width: 100%;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-        height: 300px;
-        max-height: 400px;
-      }
-      @media (min-width: 768px) {
-        .chart-container {
-          height: 350px;
-        }
-      }
-      .metric-card {
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      }
-      .metric-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-          0 8px 10px -6px rgb(0 0 0 / 0.1);
-      }
-      .stat-number {
-        font-weight: 900;
-        font-size: 4rem;
-      }
-      .tab-button {
-        @apply px-4 py-2 text-sm font-medium rounded-t-lg transition-colors duration-200;
-      }
-      .tab-button.active {
-        @apply bg-white text-blue-600 border-b-2 border-blue-600;
-      }
-      .tab-button:not(.active) {
-        @apply text-gray-600 hover:text-blue-600 hover:bg-gray-100;
-      }
-      .tab-content {
-        @apply p-6 bg-white rounded-b-lg shadow-lg border border-gray-200;
-      }
-      .spec-list dt {
-        @apply font-semibold text-gray-700 mb-1;
-      }
-      .spec-list dd {
-        @apply text-gray-600 mb-3;
-      }
-      .price-tag {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #22c55e; /* Green 500 */
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="bg-gray-50 text-gray-800">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      <header class="text-center mb-16 md:mb-24">
+  <body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+      <header class="text-center mb-16">
         <h1
-          class="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-4"
+          class="text-5xl md:text-7xl font-extrabold text-[#073B4C] leading-tight tracking-tighter"
         >
-          Empalmadora de Fibra Óptica 4M
+          José Luis Hernández Jacobo
         </h1>
-        <div class="imagen">
-          <img display: block; margin-center: auto; margin-right: auto;
-          src="img/RHFS-4M-2-300x300-1.png" />
-        </div>
-
-        <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
-          Una exploración interactiva de la fusión por revestimiento que
-          redefine la precisión y la velocidad en las redes de fibra óptica.
+        <p class="text-xl md:text-2xl text-[#118AB2] font-light mt-4">
+          Diseñador & Especialista en Marketing Digital / SEO
         </p>
-        <p class="mt-4 price-tag">$ 1,925.00 + IVA (USD)</p>
       </header>
 
-      <section id="metrics" class="mb-16 md:mb-24">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-            Rendimiento en Cifras
-          </h2>
-          <p class="mt-3 max-w-2xl mx-auto text-md text-gray-500">
-            Estos son los indicadores clave que definen la eficiencia superior
-            de la Empalmadora 4M. Las cifras se animan al volverse visibles en
-            la pantalla, destacando el impacto de su rendimiento.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div
-            class="metric-card bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center"
-          >
-            <p
-              class="text-sm font-semibold text-blue-600 uppercase tracking-wider"
-            >
-              Velocidad de Fusión
-            </p>
-            <div class="my-4">
-              <span id="speed-stat" class="stat-number text-blue-500">0</span>
-              <span class="text-2xl font-bold text-gray-500">seg</span>
-            </div>
-            <p class="text-gray-600">
-              Proceso de fusión de fibra completado automáticamente en modo
-              rápido.
-            </p>
-          </div>
-          <div
-            class="metric-card bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center"
-          >
-            <p
-              class="text-sm font-semibold text-green-600 uppercase tracking-wider"
-            >
-              Pérdida de Empalme
-            </p>
-            <div class="my-4">
-              <span class="text-2xl font-bold text-gray-500">&lt;</span>
-              <span id="loss-stat" class="stat-number text-green-500"
-                >0.00</span
-              >
-              <span class="text-2xl font-bold text-gray-500">dB</span>
-            </div>
-            <p class="text-gray-600">
-              Atenuación de señal mínima garantizada para fibra monomodo
-              (SMF/BIF).
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="comparison-chart" class="mb-16 md:mb-24">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-            Análisis Comparativo
-          </h2>
-          <p class="mt-3 max-w-2xl mx-auto text-md text-gray-500">
-            Esta visualización le permite comparar directamente el rendimiento
-            de la Empalmadora 4M frente a un estándar de la industria. Use los
-            botones para cambiar entre las métricas de 'Tiempo' y 'Pérdida' y
-            observe la diferencia.
-          </p>
-          <div class="mt-6 flex justify-center gap-4">
-            <button
-              id="show-speed-btn"
-              class="bg-blue-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all"
-            >
-              Comparar Tiempo
-            </button>
-            <button
-              id="show-loss-btn"
-              class="bg-gray-200 text-gray-800 font-semibold py-2 px-5 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 transition-all"
-            >
-              Comparar Pérdida
-            </button>
-          </div>
-        </div>
+      <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
-          class="chart-container bg-white p-4 rounded-2xl shadow-lg border border-gray-200"
+          class="md:col-span-2 lg:col-span-3 card p-8 flex flex-col md:flex-row items-center"
         >
-          <canvas id="performanceChart"></canvas>
+          <div class="md:w-2/3">
+            <h2 class="text-3xl font-bold text-[#073B4C] mb-4">
+              Perfil Profesional
+            </h2>
+            <p class="text-gray-600 leading-relaxed text-lg">
+              Profesional con amplia experiencia en Diseño Gráfico, Marketing
+              Digital y SEO, especializado en la creación y administración de
+              plataformas web y e-commerce. Habilidad en el desarrollo de
+              estrategias de posicionamiento, analítica web y gestión de
+              proyectos. Dominio de diversas herramientas y metodologías ágiles,
+              con un enfoque en la optimización de la experiencia de usuario
+              (UI/UX) y la implementación de soluciones innovadoras, incluyendo
+              el uso de Inteligencia Artificial.
+            </p>
+          </div>
+          <div class="md:w-1/3 mt-8 md:mt-0 flex justify-center">
+            <div
+              class="chart-container"
+              style="height: 250px; max-height: 250px"
+            >
+              <canvas id="skillsDonutChart"></canvas>
+            </div>
+          </div>
         </div>
-      </section>
 
-      <section id="technology" class="mb-16 md:mb-24">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-            La Tecnología Detrás del Rendimiento
+        <div class="lg:col-span-2 card p-8">
+          <h2 class="text-3xl font-bold text-[#073B4C] mb-4 text-center">
+            Línea de Tiempo Profesional
           </h2>
-          <p class="mt-3 max-w-2xl mx-auto text-md text-gray-500">
-            La eficiencia de la Empalmadora 4M no es casualidad. Se basa en
-            pilares tecnológicos que trabajan en conjunto para asegurar
-            resultados impecables y un proceso automatizado.
+          <p class="text-center text-gray-500 mb-10">
+            Un recorrido visual por una carrera dedicada a la innovación
+            digital, el crecimiento estratégico y la adaptación a nuevas
+            tecnologías, desde los inicios del e-commerce hasta la era de la IA.
           </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div
-            class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 flex items-start space-x-6"
-          >
-            <div class="text-4xl">👁️</div>
-            <div>
-              <h3 class="text-xl font-bold mb-2">
-                Procesamiento de Imágenes de Alta Velocidad
+          <div class="relative pl-8 border-l-4 border-dashed border-[#118AB2]">
+            <div class="timeline-item mb-10">
+              <h3 class="font-bold text-xl text-[#073B4C]">
+                ACTUAL - JOSELO DRONE
               </h3>
-              <p class="text-gray-600">
-                Un sistema avanzado con monitores CMOS duales (eje X e Y) que
-                analiza la fibra en tiempo real, identificando su estado y
-                posición para una alineación automática y precisa, eliminando el
-                error humano.
+              <p class="text-md text-gray-500">
+                Gestor E-commerce, Diseño Web y SEO. Administración de
+                servidores y posicionamiento en buscadores.
               </p>
             </div>
-          </div>
-          <div
-            class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 flex items-start space-x-6"
-          >
-            <div class="text-4xl">🎯</div>
-            <div>
-              <h3 class="text-xl font-bold mb-2">
-                Posicionamiento de Precisión
+            <div class="timeline-item mb-10">
+              <h3 class="font-bold text-xl text-[#073B4C]">
+                2019 - 2023 - CLICHÉ SOFT
               </h3>
-              <p class="text-gray-600">
-                Una tecnología mecánica y de software especializada que ajusta
-                físicamente las fibras con una exactitud micrométrica,
-                garantizando el contacto perfecto para una fusión de mínima
-                pérdida.
+              <p class="text-md text-gray-500">
+                Diseñador Web, Analítica y UX/UI. Administrador de Hubspot para
+                campañas y landing pages.
               </p>
             </div>
-          </div>
-          <div
-            class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 flex items-start space-x-6 col-span-1 md:col-span-2"
-          >
-            <div class="text-4xl">⚙️</div>
-            <div>
-              <h3 class="text-xl font-bold mb-2">Automatización Inteligente</h3>
-              <p class="text-gray-600">
-                Cuenta con auto comprobación de la cara extrema, auto empalme,
-                auto optimización de arco y auto calentamiento, simplificando el
-                proceso y asegurando la consistencia.
+            <div class="timeline-item mb-10">
+              <h3 class="font-bold text-xl text-[#073B4C]">
+                2012 - 2018 - Múltiples Roles Clave
+              </h3>
+              <p class="text-md text-gray-500">
+                Roles de liderazgo en diseño y contenido en Aprende Institute,
+                CUAED UNAM, y Hospital H+ Los Cabos.
+              </p>
+            </div>
+            <div class="timeline-item mb-10">
+              <h3 class="font-bold text-xl text-[#073B4C]">
+                2012 - 2015 - Médica Sur
+              </h3>
+              <p class="text-md text-gray-500">
+                Desarrollo del portal hospitalario, SEO, UX-UI, y gestión de
+                marketing digital en un entorno corporativo.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <h3 class="font-bold text-xl text-[#073B4C]">
+                2000 - 2006 - GRUPO ELEKTRA
+              </h3>
+              <p class="text-md text-gray-500">
+                Pionero en el desarrollo del sitio e-commerce. Desarrollo de UI
+                y logística digital usando metodología RUP.
               </p>
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="detailed-specs" class="mb-16 md:mb-24">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-            Especificaciones Detalladas
+        <div class="card p-8">
+          <h2 class="text-3xl font-bold text-[#073B4C] mb-4 text-center">
+            Competencias Clave
           </h2>
-          <p class="mt-3 max-w-2xl mx-auto text-md text-gray-500">
-            Explore las características técnicas completas de la Empalmadora 4M.
-            Utilice las pestañas para navegar por las diferentes categorías de
-            especificaciones.
+          <p class="text-center text-gray-500 mb-6">
+            Un perfil multidisciplinario que combina creatividad, tecnología y
+            estrategia, demostrando una alta capacidad de adaptación.
           </p>
-        </div>
-        <div
-          class="max-w-5xl mx-auto bg-gray-100 rounded-lg shadow-lg border border-gray-200"
-        >
-          <div role="tablist" class="flex flex-wrap border-b border-gray-200">
-            <button
-              role="tab"
-              id="tab-generales"
-              class="tab-button active"
-              aria-controls="panel-generales"
-              aria-selected="true"
-            >
-              Generales
-            </button>
-            <button
-              role="tab"
-              id="tab-pantalla"
-              class="tab-button"
-              aria-controls="panel-pantalla"
-              aria-selected="false"
-            >
-              Pantalla y Sistema
-            </button>
-            <button
-              role="tab"
-              id="tab-rendimiento"
-              class="tab-button"
-              aria-controls="panel-rendimiento"
-              aria-selected="false"
-            >
-              Rendimiento y Ciclos
-            </button>
-            <button
-              role="tab"
-              id="tab-compatibilidad"
-              class="tab-button"
-              aria-controls="panel-compatibilidad"
-              aria-selected="false"
-            >
-              Compatibilidad
-            </button>
-            <button
-              role="tab"
-              id="tab-entorno"
-              class="tab-button"
-              aria-controls="panel-entorno"
-              aria-selected="false"
-            >
-              Entorno Operacional
-            </button>
-          </div>
-
-          <div id="panel-generales" role="tabpanel" class="tab-content">
-            <dl
-              class="spec-list grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
-            >
-              <div>
-                <dt>Pérdida de Empalme:</dt>
-                <dd>
-                  SMF / BIF: ≤0.02dB (típico); MMF: ≤0.01dB (típico); DSF /
-                  NZDSF / EDF: ≤0.04dB (típico)
-                </dd>
-              </div>
-              <div>
-                <dt>Pérdida por Retorno:</dt>
-                <dd>&gt;60dB</dd>
-              </div>
-              <div>
-                <dt>Soporte (Holder):</dt>
-                <dd>
-                  4 en 1 de alta precisión (250 μm / 900 μm / patch cord / FTTx
-                  fibra interior, etc.), soporte SOC
-                </dd>
-              </div>
-              <div>
-                <dt>Batería:</dt>
-                <dd>
-                  Diseño de separación de batería única y host para
-                  mantenimiento conveniente y reemplazo
-                </dd>
-              </div>
-              <div>
-                <dt>Ranura en V:</dt>
-                <dd>Diseño con doble ranura en V, con luz LED blanca</dd>
-              </div>
-              <div>
-                <dt>Portabilidad:</dt>
-                <dd>
-                  Diseño de correas portátiles de alta resistencia, conveniente
-                  para colgar y operar
-                </dd>
-              </div>
-              <div>
-                <dt>Luz Interna:</dt>
-                <dd>Facilita el entorno de operación en la oscuridad</dd>
-              </div>
-              <div>
-                <dt>Adaptabilidad Ambiental:</dt>
-                <dd>
-                  Prevención de viento, arena y polvo, impermeable, diseño
-                  asemático adaptable al entorno al aire libre
-                </dd>
-              </div>
-              <div>
-                <dt>Pantalla de Visualización:</dt>
-                <dd>
-                  Puede voltearse antes y después, para observar
-                  convenientemente desde varios ángulos
-                </dd>
-              </div>
-              <div>
-                <dt>Prueba de Caída:</dt>
-                <dd>Certificado de prueba de caída de 76 cm / ISTA</dd>
-              </div>
-              <div>
-                <dt>Peso:</dt>
-                <dd>1.2kg (Sin Batería) / 1.5kg (Con Batería)</dd>
-              </div>
-              <div>
-                <dt>Dimensiones (LxAxH):</dt>
-                <dd>125x125x135mm (Sin Bota Protectora)</dd>
-              </div>
-            </dl>
-          </div>
-          <div id="panel-pantalla" role="tabpanel" class="tab-content hidden">
-            <dl
-              class="spec-list grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
-            >
-              <div>
-                <dt>Pantalla:</dt>
-                <dd>LCD a color de 3.5″, X/Y / X / Y, volteo automático</dd>
-              </div>
-              <div>
-                <dt>Monitores:</dt>
-                <dd>CMOS duales</dd>
-              </div>
-              <div>
-                <dt>Visualización:</dt>
-                <dd>
-                  Eje X e Y (visualización separada o visualización simultánea),
-                  conmutación rápida
-                </dd>
-              </div>
-              <div>
-                <dt>Zoom del Sistema de Imagen:</dt>
-                <dd>200x</dd>
-              </div>
-              <div>
-                <dt>Memoria:</dt>
-                <dd>5,000 Empalmes / 100 capturas de pantalla</dd>
-              </div>
-            </dl>
-          </div>
-          <div
-            id="panel-rendimiento"
-            role="tabpanel"
-            class="tab-content hidden"
-          >
-            <dl
-              class="spec-list grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
-            >
-              <div>
-                <dt>Tiempo de Empalme:</dt>
-                <dd>≤9 segundos (modo rápido)</dd>
-              </div>
-              <div>
-                <dt>Tiempo de Horno:</dt>
-                <dd>≤36 segundos (ajustable), 20 modos</dd>
-              </div>
-              <div>
-                <dt>Tiempo de Arranque:</dt>
-                <dd>5 segundos</dd>
-              </div>
-              <div>
-                <dt>Carga de Batería:</dt>
-                <dd>Carga rápida – 3 horas</dd>
-              </div>
-              <div>
-                <dt>Ciclos de Batería:</dt>
-                <dd>200+ (empalmes + horno) ciclos</dd>
-              </div>
-              <div>
-                <dt>Vida de Electrodos:</dt>
-                <dd>5000 arcos</dd>
-              </div>
-              <div>
-                <dt>Contador de Electrodos:</dt>
-                <dd>Incorporado para advertir el reemplazo</dd>
-              </div>
-              <div>
-                <dt>Prueba de Tensión:</dt>
-                <dd>2N</dd>
-              </div>
-              <div>
-                <dt>Modo de Empalme:</dt>
-                <dd>Arcing / 60 modos</dd>
-              </div>
-              <div>
-                <dt>Evaluación de Pérdida por Empalme:</dt>
-                <dd>Sí</dd>
-              </div>
-              <div>
-                <dt>Chequeo de Fibra:</dt>
-                <dd>
-                  Ángulo de corte de fibra / Compensación de Eje / Pérdida /
-                  Alineación de Fibra / Foco, etc.
-                </dd>
-              </div>
-            </dl>
-          </div>
-          <div
-            id="panel-compatibilidad"
-            role="tabpanel"
-            class="tab-content hidden"
-          >
-            <dl
-              class="spec-list grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
-            >
-              <div>
-                <dt>Tipo de Fibras:</dt>
-                <dd>
-                  SMF (ITU-T G.652), MMF (ITU-T G.651), DSF (ITU-T G.653), NZDSF
-                  (ITU-T G.655), BIF (ITU-T G.657), EDF
-                </dd>
-              </div>
-              <div>
-                <dt>Material de Fibra:</dt>
-                <dd>SiO2</dd>
-              </div>
-              <div>
-                <dt>Número de Fibras:</dt>
-                <dd>1 (Single Fiber)</dd>
-              </div>
-              <div>
-                <dt>Diámetro de Cladding:</dt>
-                <dd>80 – 150μm</dd>
-              </div>
-              <div>
-                <dt>Diámetro de Coating:</dt>
-                <dd>100 – 1000μm</dd>
-              </div>
-              <div>
-                <dt>Longitud de Corte de Fibra:</dt>
-                <dd>
-                  8 – 16mm (Diámetro de Coating: 0 – 250μm); 16mm (Diámetro
-                  Coating: 250 – 1000μm)
-                </dd>
-              </div>
-              <div>
-                <dt>Longitud de la Manga:</dt>
-                <dd>≤60mm</dd>
-              </div>
-            </dl>
-          </div>
-          <div id="panel-entorno" role="tabpanel" class="tab-content hidden">
-            <dl
-              class="spec-list grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
-            >
-              <div>
-                <dt>Temperatura Operacional:</dt>
-                <dd>-25℃ – 50℃</dd>
-              </div>
-              <div>
-                <dt>Temperatura de Almacenamiento:</dt>
-                <dd>-30℃ – 70℃</dd>
-              </div>
-              <div>
-                <dt>Humedad:</dt>
-                <dd>0 – 90% (Non-Condensada)</dd>
-              </div>
-              <div>
-                <dt>Altitud:</dt>
-                <dd>0 – 5000m</dd>
-              </div>
-              <div>
-                <dt>Velocidad de Vientos:</dt>
-                <dd>≤15m/s</dd>
-              </div>
-            </dl>
+          <div class="chart-container">
+            <canvas id="skillsRadarChart"></canvas>
           </div>
         </div>
-      </section>
 
-      <section id="exclusive-features" class="mb-16 md:mb-24">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-            Características Exclusivas y Soporte
+        <div class="md:col-span-2 lg:col-span-3 card p-8">
+          <h2 class="text-3xl font-bold text-[#073B4C] mb-4 text-center">
+            Dominio de Herramientas y Software
           </h2>
-          <p class="mt-3 max-w-2xl mx-auto text-md text-gray-500">
-            La Empalmadora 4M no solo destaca por su rendimiento, sino también
-            por funcionalidades únicas que ofrecen seguridad y conveniencia,
-            respaldadas por un sólido soporte local.
+          <p class="text-center text-gray-500 mb-8">
+            Esta gráfica compara el nivel de experiencia en el ecosistema de
+            herramientas digitales. Interactúa con la gráfica para explorar cada
+            categoría.
           </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div
-            class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 flex items-start space-x-6"
-          >
-            <div class="text-4xl">🔒</div>
-            <div>
-              <h3 class="text-xl font-bold mb-2">
-                Sistema de Contraseña Programable
-              </h3>
-              <p class="text-gray-600">
-                Permite programar la máquina para solicitar una contraseña
-                después de un número "X" de empalmes. Ideal para el control de
-                uso, alquiler de equipos o como medida de seguridad antirrobo.
-              </p>
-            </div>
-          </div>
-          <div
-            class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 flex items-start space-x-6"
-          >
-            <div class="text-4xl">🇲🇽</div>
-            <div>
-              <h3 class="text-xl font-bold mb-2">
-                Centro de Servicio en México
-              </h3>
-              <p class="text-gray-600">
-                Soporte y mantenimiento garantizados a través de su representada
-                DECU Soluciones y laboratorios asociados en México, asegurando
-                tranquilidad y eficiencia.
-              </p>
-            </div>
+          <div class="chart-container" style="height: 450px; max-width: 900px">
+            <canvas id="softwareBarChart"></canvas>
           </div>
         </div>
-      </section>
 
-      <footer class="text-center mt-16 md:mt-24 border-t border-gray-200 pt-8">
-        <p class="text-gray-500">Marca: Rouhan | Modelo: RHSFG-95EA</p>
-        <p class="text-gray-500 text-sm mt-2">
-          Aplicación interactiva de datos generada para demostrar las
-          capacidades de la Empalmadora 4M. Especificaciones sujetas a cambio
-          sin previo aviso.
+        <div class="lg:col-span-1 card p-8">
+          <h2 class="text-3xl font-bold text-[#073B4C] mb-6">Formación</h2>
+          <ul class="space-y-6">
+            <li class="flex items-start">
+              <span class="text-4xl text-[#118AB2] mr-4">🎓</span>
+              <div>
+                <h3 class="font-bold text-lg">
+                  Licenciatura en Diseño Gráfico
+                </h3>
+                <p class="text-gray-600">Facultad de Artes y Diseño, UNAM</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <span class="text-4xl text-[#118AB2] mr-4">📱</span>
+              <div>
+                <h3 class="font-bold text-lg">
+                  Diplomado en Desarrollo Web y Apps
+                </h3>
+                <p class="text-gray-600">ENAP-UNAM, 2013</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-1 lg:col-span-2 card p-8">
+          <h2 class="text-3xl font-bold text-[#073B4C] mb-6">
+            Habilidades Estratégicas
+          </h2>
+          <p class="text-gray-600 mb-6">
+            Un enfoque integral en resultados de negocio, utilizando
+            metodologías ágiles y herramientas de vanguardia.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span
+              class="bg-[#06D6A0] text-white px-4 py-2 rounded-full text-md font-semibold"
+              >SEO y Ecommerce</span
+            >
+            <span
+              class="bg-[#118AB2] text-white px-4 py-2 rounded-full text-md font-semibold"
+              >UI / UX</span
+            >
+            <span
+              class="bg-[#FFD166] text-[#073B4C] px-4 py-2 rounded-full text-md font-semibold"
+              >Inteligencia Artificial</span
+            >
+            <span
+              class="bg-[#EF476F] text-white px-4 py-2 rounded-full text-md font-semibold"
+              >Branding y Storytelling</span
+            >
+            <span
+              class="bg-[#118AB2] text-white px-4 py-2 rounded-full text-md font-semibold"
+              >Analítica Web GA4</span
+            >
+            <span
+              class="bg-[#06D6A0] text-white px-4 py-2 rounded-full text-md font-semibold"
+              >CRM (Hubspot/Clientify)</span
+            >
+            <span
+              class="bg-[#FFD166] text-[#073B4C] px-4 py-2 rounded-full text-md font-semibold"
+              >Metodología SCRUM & RUP</span
+            >
+            <span
+              class="bg-[#EF476F] text-white px-4 py-2 rounded-full text-md font-semibold"
+              >Video Marketing con Drone</span
+            >
+          </div>
+        </div>
+      </main>
+
+      <footer class="text-center mt-16 py-8 border-t-2 border-gray-200">
+        <h2 class="text-4xl font-bold text-[#073B4C] mb-4">
+          Contacto y Portafolio
+        </h2>
+        <p class="text-gray-600 mb-8 max-w-2xl mx-auto text-lg">
+          ¿Interesado en colaborar o conocer más sobre mi trabajo? No dude en
+          contactarme o explorar mi portafolio digital.
         </p>
+        <div class="flex justify-center items-center space-x-8">
+          <a
+            href="mailto:joselodrone@gmail.com"
+            class="bg-[#118AB2] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#073B4C] transition-transform transform hover:scale-105"
+            >📧 E-mail</a
+          >
+          <a
+            href="http://www.behance.net/imersionjacob"
+            target="_blank"
+            class="bg-[#073B4C] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#118AB2] transition-transform transform hover:scale-105"
+            >🔗 Behance</a
+          >
+          <a
+            href="https://joselodrone.mypixieset.com/about/"
+            target="_blank"
+            class="bg-[#06D6A0] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#05a77e] transition-transform transform hover:scale-105"
+            >🖼️ Pixieset</a
+          >
+        </div>
       </footer>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const chartData = {
-          speed: {
-            labels: ["Empalmadora Estándar", "Empalmadora 4M"],
-            datasets: [
-              {
-                label: "Tiempo de Fusión (s)",
-                data: [25, 9],
-                backgroundColor: [
-                  "rgba(156, 163, 175, 0.6)",
-                  "rgba(59, 130, 246, 0.6)",
-                ],
-                borderColor: ["rgb(156, 163, 175)", "rgb(59, 130, 246)"],
-                borderWidth: 2,
-              },
-            ],
-          },
-          loss: {
-            labels: ["Empalmadora Estándar", "Empalmadora 4M"],
-            datasets: [
-              {
-                label: "Pérdida de Empalme (dB)",
-                data: [0.05, 0.02],
-                backgroundColor: [
-                  "rgba(156, 163, 175, 0.6)",
-                  "rgba(16, 185, 129, 0.6)",
-                ],
-                borderColor: ["rgb(156, 163, 175)", "rgb(16, 185, 129)"],
-                borderWidth: 2,
-              },
-            ],
-          },
-        };
-
-        const chartConfig = {
-          type: "bar",
-          data: chartData.speed,
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: {
-                beginAtZero: true,
-                grid: {
-                  color: "#e5e7eb",
-                },
-                ticks: {
-                  color: "#4b5563",
-                },
-              },
-              x: {
-                grid: {
-                  display: false,
-                },
-                ticks: {
-                  color: "#4b5563",
-                  font: {
-                    size: 14,
-                  },
-                },
-              },
-            },
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
-                enabled: true,
-                backgroundColor: "#1f2937",
-                titleFont: {
-                  size: 16,
-                },
-                bodyFont: {
-                  size: 14,
-                },
-                callbacks: {
-                  label: function (context) {
-                    let label = context.dataset.label || "";
-                    if (label) {
-                      label += ": ";
-                    }
-                    if (context.parsed.y !== null) {
-                      label += context.parsed.y;
-                      if (context.dataset.label.includes("Tiempo")) {
-                        label += " s";
-                      } else {
-                        label += " dB";
-                      }
-                    }
-                    return label;
-                  },
-                },
-              },
-            },
-          },
-        };
-
-        const ctx = document
-          .getElementById("performanceChart")
-          .getContext("2d");
-        let myChart = new Chart(ctx, chartConfig);
-
-        const showSpeedBtn = document.getElementById("show-speed-btn");
-        const showLossBtn = document.getElementById("show-loss-btn");
-
-        function updateChart(dataType) {
-          myChart.data = chartData[dataType];
-          myChart.update();
-
-          if (dataType === "speed") {
-            showSpeedBtn.classList.add("bg-blue-600", "text-white");
-            showSpeedBtn.classList.remove("bg-gray-200", "text-gray-800");
-            showLossBtn.classList.add("bg-gray-200", "text-gray-800");
-            showLossBtn.classList.remove("bg-green-600", "text-white");
+      function wrapLabel(str, maxWidth) {
+        if (typeof str !== "string" || str.length <= maxWidth) {
+          return str;
+        }
+        const words = str.split(" ");
+        let lines = [];
+        let currentLine = words[0];
+        for (let i = 1; i < words.length; i++) {
+          if ((currentLine + " " + words[i]).length > maxWidth) {
+            lines.push(currentLine);
+            currentLine = words[i];
           } else {
-            showLossBtn.classList.add("bg-green-600", "text-white");
-            showLossBtn.classList.remove("bg-gray-200", "text-gray-800");
-            showSpeedBtn.classList.add("bg-gray-200", "text-gray-800");
-            showSpeedBtn.classList.remove("bg-blue-600", "text-white");
+            currentLine += " " + words[i];
           }
         }
+        lines.push(currentLine);
+        return lines;
+      }
 
-        showSpeedBtn.addEventListener("click", () => updateChart("speed"));
-        showLossBtn.addEventListener("click", () => updateChart("loss"));
-
-        function animateValue(obj, start, end, duration, decimals = 0) {
-          let startTimestamp = null;
-          const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min(
-              (timestamp - startTimestamp) / duration,
-              1
-            );
-            const value = progress * (end - start) + start;
-            obj.innerHTML = value.toFixed(decimals);
-            if (progress < 1) {
-              window.requestAnimationFrame(step);
-            }
-          };
-          window.requestAnimationFrame(step);
+      const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+          return label.join(" ");
         }
+        return label;
+      };
 
-        const speedStat = document.getElementById("speed-stat");
-        const lossStat = document.getElementById("loss-stat");
+      const chartColors = {
+        blue: "#118AB2",
+        green: "#06D6A0",
+        yellow: "#FFD166",
+        red: "#EF476F",
+        darkBlue: "#073B4C",
+      };
 
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                if (
-                  entry.target.id === "speed-stat" &&
-                  parseInt(entry.target.innerHTML) === 0
-                ) {
-                  animateValue(speedStat, 0, 9, 1500, 0);
-                }
-                if (
-                  entry.target.id === "loss-stat" &&
-                  parseFloat(entry.target.innerHTML) === 0
-                ) {
-                  animateValue(lossStat, 0, 0.02, 1500, 2);
-                }
-              }
-            });
+      const skillsDonutCtx = document
+        .getElementById("skillsDonutChart")
+        .getContext("2d");
+      new Chart(skillsDonutCtx, {
+        type: "doughnut",
+        data: {
+          labels: [
+            "Diseño y Contenido",
+            "Marketing y SEO",
+            "Tecnología y Desarrollo",
+          ],
+          datasets: [
+            {
+              label: "Distribución de Habilidades",
+              data: [45, 35, 20],
+              backgroundColor: [
+                chartColors.blue,
+                chartColors.green,
+                chartColors.yellow,
+              ],
+              borderColor: "#FFFFFF",
+              borderWidth: 5,
+              hoverOffset: 15,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "60%",
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                color: "#4A5568",
+                font: {
+                  size: 14,
+                },
+                padding: 20,
+              },
+            },
+            tooltip: {
+              callbacks: {
+                title: tooltipTitleCallback,
+              },
+            },
           },
-          { threshold: 0.5 }
-        );
+        },
+      });
 
-        observer.observe(speedStat);
-        observer.observe(lossStat);
+      const skillsRadarCtx = document
+        .getElementById("skillsRadarChart")
+        .getContext("2d");
+      new Chart(skillsRadarCtx, {
+        type: "radar",
+        data: {
+          labels: [
+            wrapLabel("Diseño (UI/UX)", 16),
+            wrapLabel("Desarrollo Web", 16),
+            wrapLabel("SEO y Analítica", 16),
+            wrapLabel("Marketing Digital", 16),
+            wrapLabel("Gestión de Proyectos", 16),
+          ],
+          datasets: [
+            {
+              label: "Nivel de Competencia",
+              data: [9, 7, 9, 8, 8],
+              backgroundColor: "rgba(17, 138, 178, 0.2)",
+              borderColor: chartColors.blue,
+              pointBackgroundColor: chartColors.blue,
+              pointBorderColor: "#fff",
+              pointHoverBackgroundColor: "#fff",
+              pointHoverBorderColor: chartColors.blue,
+              borderWidth: 3,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              angleLines: { color: "rgba(0, 0, 0, 0.1)" },
+              grid: { color: "rgba(0, 0, 0, 0.1)" },
+              pointLabels: {
+                font: { size: 14 },
+                color: "#4A5568",
+              },
+              ticks: {
+                backdropColor: "transparent",
+                color: "#4A5568",
+                stepSize: 2,
+                font: {
+                  size: 12,
+                },
+              },
+              suggestedMin: 0,
+              suggestedMax: 10,
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              callbacks: {
+                title: tooltipTitleCallback,
+              },
+            },
+          },
+        },
+      });
 
-        const tabButtons = document.querySelectorAll('[role="tab"]');
-        const tabPanels = document.querySelectorAll('[role="tabpanel"]');
-
-        tabButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            const targetPanelId = button.getAttribute("aria-controls");
-
-            tabButtons.forEach((btn) => {
-              btn.classList.remove("active");
-              btn.setAttribute("aria-selected", "false");
-            });
-            tabPanels.forEach((panel) => {
-              panel.classList.add("hidden");
-            });
-
-            button.classList.add("active");
-            button.setAttribute("aria-selected", "true");
-            document.getElementById(targetPanelId).classList.remove("hidden");
-          });
-        });
+      const softwareBarCtx = document
+        .getElementById("softwareBarChart")
+        .getContext("2d");
+      new Chart(softwareBarCtx, {
+        type: "bar",
+        data: {
+          labels: [
+            wrapLabel("Adobe Suite (Photoshop, Illustrator, Premiere)", 20),
+            wrapLabel("CMS y E-commerce (WordPress, Shopify)", 20),
+            wrapLabel("Herramientas de Inteligencia Artificial", 20),
+            wrapLabel("Herramientas SEO (Semrush, GA4)", 20),
+            wrapLabel("CRM (Hubspot, Clientify)", 20),
+            wrapLabel("Desarrollo (HTML5, Bootstrap)", 20),
+            wrapLabel("Plataformas LMS (Moodle, H5P)", 20),
+          ],
+          datasets: [
+            {
+              label: "Nivel de Experiencia (1-10)",
+              data: [9, 9, 8, 9, 8, 8, 8],
+              backgroundColor: [
+                chartColors.blue,
+                chartColors.green,
+                chartColors.yellow,
+                chartColors.red,
+                chartColors.darkBlue,
+                chartColors.green,
+                chartColors.blue,
+              ],
+              borderRadius: 8,
+              borderSkipped: false,
+              barThickness: 25,
+            },
+          ],
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: {
+                display: true,
+                color: "rgba(0,0,0,0.05)",
+              },
+              ticks: {
+                color: "#4A5568",
+                font: {
+                  size: 14,
+                },
+              },
+            },
+            y: {
+              grid: {
+                display: false,
+              },
+              ticks: {
+                color: "#4A5568",
+                font: {
+                  size: 14,
+                },
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              callbacks: {
+                title: tooltipTitleCallback,
+              },
+            },
+          },
+        },
       });
     </script>
   </body>
